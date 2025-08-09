@@ -10,9 +10,9 @@ permissions:
 # Trigger on every push and pull request
 on:
   push:
-    branches: [ main ]
+    branches: [ main, develop, 'feature/setup-ci-pipeline'  ]
   pull_request:
-    branches: [ main ]
+    branches: [ main, develop ]
     types: [opened, synchronize, reopened]
 
 env:
@@ -62,14 +62,14 @@ jobs:
         run: mvn clean package -DskipTests
 
       - name: Upload JAR
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: app-jar
           path: target/*.jar
           retention-days: 1
 
       - name: Upload test classes
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: test-classes
           path: |
@@ -95,7 +95,7 @@ jobs:
           cache: maven
 
       - name: Download artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: test-classes
           path: target/
@@ -105,7 +105,7 @@ jobs:
 
       - name: Upload test results
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: unit-test-results
           path: target/surefire-reports/
@@ -128,7 +128,7 @@ jobs:
           cache: maven
 
       - name: Download artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: test-classes
           path: target/
@@ -138,7 +138,7 @@ jobs:
 
       - name: Upload test results
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: integration-test-results
           path: target/failsafe-reports/
@@ -164,7 +164,7 @@ jobs:
           cache: maven
 
       - name: Download test results
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           path: target/
 
@@ -206,7 +206,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Download JAR artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: app-jar
           path: target/
