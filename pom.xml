@@ -25,6 +25,13 @@
   </properties>
 
   <dependencies>
+    <!-- Explicitly override vulnerable spring-webmvc version to fix CVE-2024-38819 -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-webmvc</artifactId>
+      <version>6.1.15</version>
+    </dependency>
+
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
