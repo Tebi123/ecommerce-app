@@ -1,0 +1,12 @@
+extends: default
+
+rules:
+  document-start: disable # Helm often handles this between docs
+  new-line-at-end-of-file: enable
+  new-lines: enable
+  # Helm mustache conflicts with this rule; disable it:
+  braces: disable
+
+yaml-files:
+- '*.yaml'
+- '*.yml'

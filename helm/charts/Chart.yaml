@@ -1,3 +1,4 @@
+---
 apiVersion: v2
 name: ecommerce-app
 description: Simple E-commerce Application
