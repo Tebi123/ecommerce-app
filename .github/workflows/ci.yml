@@ -175,13 +175,13 @@ jobs:
             key: ${{ runner.os }}-sonar
             restore-keys: ${{ runner.os }}-sonar
 
-      - name: SonarCloud Scan
+      - name: SonarQube Scan
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: mvn clean verify sonar:sonar
 
-  #Use SonarQube Quality Gate Check Action
+  # Use SonarQube Quality Gate Check Action
       - name: SonarQube Quality Gate check
         uses: sonarsource/sonarqube-quality-gate-action@master
         timeout-minutes: 2
