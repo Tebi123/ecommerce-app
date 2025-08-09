@@ -14,7 +14,7 @@ RUN mvn clean package -DskipTests && \
     mv target/*.jar target/app.jar
 
 # Runtime stage
-FROM eclipse-temurin:17-jre-alpine@sha256:dd8238c151293ae6a7c22898ef2f0df2af8a0f3d9c80e2f3d5ec08f7d3b91baa
+FROM eclipse-temurin:17-jre-alpine
 
 # Add non-root user
 RUN addgroup -g 1001 -S appgroup && \
