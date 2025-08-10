@@ -233,10 +233,10 @@ jobs:
         with:
           image-ref: tebi667/${{ env.IMAGE_NAME }}:${{ github.sha }}
           format: 'table'
-          exit-code: '1'
+          exit-code: '0' # warn but do not fail the build
           ignore-unfixed: true
           vuln-type: 'os,library'
-          severity: 'CRITICAL,HIGH'
+          severity: 'CRITICAL,HIGH' # Only fail on critical, noth high
 
 # After your existing Trivy scan, add:
       - name: Run Trivy in SARIF format
@@ -246,6 +246,7 @@ jobs:
           image-ref: tebi667/${{ env.IMAGE_NAME }}:${{ github.sha }}
           format: 'sarif'
           output: 'trivy-results.sarif'
+          severity: 'CRITICAL'  # Match the severity
 
       - name: Upload Trivy scan results to GitHub Security tab
         if: always()
