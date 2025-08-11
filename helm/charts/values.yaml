@@ -6,10 +6,24 @@ image:
   tag: latest
   pullPolicy: Always
 
+nameOverride: ""
+fullnameOverride: ""
+
 service:
   type: LoadBalancer
   port: 80
   targetPort: 8080
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+  hosts:
+    - host: ecommerce-app.local
+      paths:
+        - path: /
+          pathType: Prefix
+  tls: []
 
 resources:
   limits:
@@ -18,3 +32,60 @@ resources:
   requests:
     cpu: 100m
     memory: 128Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+
+nodeSelector: {}
+tolerations: []
+affinity: {}
+
+# Health check configurations
+healthcheck:
+  liveness:
+    path: /health
+    port: 8080
+    initialDelaySeconds: 30
+    periodSeconds: 10
+  readiness:
+    path: /health
+    port: 8080
+    initialDelaySeconds: 20
+    periodSeconds: 5
+
+# Application configuration
+app:
+  env:
+    SPRING_PROFILES_ACTIVE: "dev"
+    SERVER_PORT: "8080"
+
+# Security configurations
+securityContext:
+  runAsNonRoot: true
+  runAsUser: 1000
+  runAsGroup: 3000
+  fsGroup: 2000
+  capabilities:
+    drop:
+    - ALL
+  readOnlyRootFilesystem: true
+  allowPrivilegeEscalation: false
+
+podSecurityContext:
+  runAsNonRoot: true
+  runAsUser: 1000
+  fsGroup: 2000
+
+# Network policies
+networkPolicy:
+  enabled: false
+  ingress: []
+  egress: []
+
+# Pod disruption budget
+podDisruptionBudget:
+  enabled: false
+  minAvailable: 1

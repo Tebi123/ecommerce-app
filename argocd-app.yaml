@@ -4,16 +4,48 @@ kind: Application
 metadata:
   name: ecommerce-app
   namespace: argocd
+  labels:
+    app.kubernetes.io/name: ecommerce-app
+    app.kubernetes.io/part-of: ecommerce-platform
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  annotations:
+    # Notifications for deployment events
+    notifications.argoproj.io/subscribe.on-sync-succeeded.slack: ecommerce-deployments
+    # Link to documentation
+    link.argocd.argoproj.io/external-link: https://github.com/Tebi123/ecommerce-app
 spec:
   project: default
   source:
     repoURL: https://github.com/Tebi123/ecommerce-app
     targetRevision: HEAD
     path: helm/charts
+    helm:
+      # Specify values file explicitly
+      valueFiles:
+        - values.yaml
+      # Override specific values for this deployment
+      parameters:
+        - name: image.tag
+          value: "latest"
+        - name: replicaCount
+          value: "2"
   destination:
     server: https://kubernetes.default.svc
-    namespace: default
+    namespace: ecommerce-app  # Dedicated namespace
   syncPolicy:
     automated:
-      prune: true
-      selfHeal: true
+      prune: true      # Remove resources when removed from Git
+      selfHeal: true   # Automatically fix drift
+      allowEmpty: false
+    syncOptions:
+      - CreateNamespace=true    # Create namespace if it doesn't exist
+      - PrunePropagationPolicy=foreground
+      - PruneLast=true
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 3m
+  revisionHistoryLimit: 10

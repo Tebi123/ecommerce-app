@@ -183,14 +183,6 @@ jobs:
           mvn clean verify sonar:sonar \
             -Dsonar.qualitygate.wait=true
 
-
-  # # Use SonarQube Quality Gate Check Action
-  #     - name: SonarQube Quality Gate check
-  #       uses: sonarsource/sonarqube-quality-gate-action@master
-  #       timeout-minutes: 2
-  #       env:
-  #         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-
   # Stage 5: Docker Build, Scan and Push
   docker:
     name: Build, Scan and Push Docker Image
@@ -236,7 +228,7 @@ jobs:
           exit-code: '0' # warn but do not fail the build
           ignore-unfixed: true
           vuln-type: 'os,library'
-          severity: 'CRITICAL,HIGH' # Only fail on critical, noth high
+          severity: 'CRITICAL,HIGH' # Only fail on critical, not high
 
 # After your existing Trivy scan, add:
       - name: Run Trivy in SARIF format
