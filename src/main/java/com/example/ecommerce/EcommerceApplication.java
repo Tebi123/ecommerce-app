@@ -18,17 +18,7 @@ public class EcommerceApplication {
   @GetMapping("/")
   public Map<String, String> home() {
     return Map.of("message", "Welcome to Simple E-commerce API");
-  }
-
-  @GetMapping("/api/v2")
-public Map<String, Object> homeV2() {
-  return Map.of(
-      "message", "Welcome to E-commerce API v2.0",
-      "version", "v2.0.0",
-      "features", List.of("enhanced-monitoring", "version-tracking")
-  );
 }
-
   @GetMapping("/products")
   public List<Map<String, Object>> getProducts() {
     return List.of(
