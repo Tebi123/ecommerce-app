@@ -17,7 +17,7 @@ public class EcommerceApplication {
 
   @GetMapping("/")
   public Map<String, String> home() {
-    return Map.of("message", "Welcome to Simple E-commerce API");
+    return Map.of("message", "Welcome to Simple E-commerce Omotebi API");
   }
 
   @GetMapping("/products")
