@@ -1,3 +1,5 @@
+#  Helmm template helpers - Reusable functions
+# Ensures consistent naming, labeling, and metadata throughout the chart.
 {{/*
 Expand the name of the chart.
 */}}

@@ -1,3 +1,4 @@
+# Configuration values for ecommerce-app deployment
 ---
 replicaCount: 2
 

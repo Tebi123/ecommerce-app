@@ -1,3 +1,4 @@
+# Creates a Service to expose the application pods to network traffic
 apiVersion: v1
 kind: Service
 metadata:

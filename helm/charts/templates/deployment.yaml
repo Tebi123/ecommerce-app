@@ -1,3 +1,5 @@
+# Kubernetes Deployment for E-commerce Application
+# Defines how the application containers should run in the cluster.
 apiVersion: apps/v1
 kind: Deployment
 metadata:

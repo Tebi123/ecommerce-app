@@ -1,3 +1,5 @@
+# ArgoCD Application: E-commerce App GitOps Deployment
+# Automatically deploys ecommerce-app from Git to Kubernetes using GitOps.
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application

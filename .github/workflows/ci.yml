@@ -10,9 +10,9 @@ permissions:
 # Trigger on every push and pull request
 on:
   push:
-    branches: [ main, develop, 'feature/setup-ci-pipeline'  ]
+    branches: [ main, develop, feature/* ]
   pull_request:
-    branches: [ main, develop ]
+    branches: [ main, develop, feature/* ]
     types: [opened, synchronize, reopened]
 
 env:

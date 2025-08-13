@@ -1,3 +1,4 @@
+# Only created when autoscaling is enabled in values.yaml
 {{- if .Values.autoscaling.enabled }}
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
